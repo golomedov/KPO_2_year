@@ -119,11 +119,11 @@ public class OrientedGraph {
     /**
      * Топологическая сортировка вершин графа.
      *
-     * @return Отсортированный список вершин.
+     * @return Отсортированный список вершин. Или null, если граф циклический.
      */
     public List<String> topologicalSort() {
         if (isCyclic()) {
-            // TODO
+            return null;
         }
 
         // Будем считать, что WHITE - непосещенная вершина, BLACK - посещенная вершина.
@@ -157,5 +157,12 @@ public class OrientedGraph {
         }
 
         sortedList.push(currentVertex.name);
+    }
+
+    /**
+     * Очищает содержимое графа.
+     */
+    public void clear() {
+        vertexes.clear();
     }
 }
