@@ -53,9 +53,9 @@ public class FileUtils {
     public static List<String> getAllRequires(String path) throws IOException {
         List<String> result = new ArrayList<>();
 
-        try (FileIterator iterator = new FileIterator(path)) {
-            while (iterator.hasNext()) {
-                String currentLine = iterator.next().trim();
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            while (reader.ready()) {
+                String currentLine = reader.readLine().trim();
                 if (currentLine.length() >= 7 && currentLine.substring(0, 7).equals("require")) {
                     currentLine = currentLine.substring(7).trim();
                     if (currentLine.length() >= 2 && currentLine.charAt(0) == '"' && currentLine.charAt(currentLine.length() - 1) == '"') {
