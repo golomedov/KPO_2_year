@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Класс предоставляет набор методов для чтения из файлов.
  */
-public class FileReader {
+public class FileUtils {
     /**
      * Считывает все строки из заданного файла.
      *
