@@ -1,6 +1,6 @@
 package util.io;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,13 +18,29 @@ public class FileUtils {
     public static List<String> getAllLines(String path) throws IOException {
         List<String> result = new ArrayList<>();
 
-        try (FileIterator iterator = new FileIterator(path)) {
-            while (iterator.hasNext()) {
-                result.add(iterator.next());
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            while (reader.ready()) {
+                result.add(reader.readLine());
             }
         }
 
         return result;
+    }
+
+    /**
+     * Записывает все переданные строки в заданный файл.
+     *
+     * @param path  Путь к файлу.
+     * @param lines Список строк.
+     * @throws IOException При ошибке ввода-вывода.
+     */
+    public static void writeAllLines(String path, List<String> lines) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
+            for (var line : lines) {
+                writer.write(line);
+                writer.write("\n");
+            }
+        }
     }
 
     /**
